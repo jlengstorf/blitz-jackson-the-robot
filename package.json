@@ -1,0 +1,13 @@
+{
+  "name": "blitz-jackson-the-robot",
+  "version": "1.0.0",
+  "description": "A Twitch chatbot for Jason Lengstorf’s Twitch stream.",
+  "main": "index.js",
+  "repository": "https://github.com/jlengstorf/blitz-jackons-the-robot.git",
+  "author": "Jason Lengstorf <jason@lengstorf.com>",
+  "license": "MIT",
+  "dependencies": {
+    "comfy.js": "^1.0.11",
+    "dotenv": "^8.1.0"
+  }
+}
