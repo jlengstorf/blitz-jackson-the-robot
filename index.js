@@ -17,6 +17,18 @@ const commands = {
 
     comfy.Say(message, channel);
   },
+  so: (user, message, {broadcaster, mod}, {channel}) => {
+    // only broadcasters or mods can shoutout
+    if(!broadcaster && !mod) {
+      return;
+    }
+    const parts = message.split(" ");
+    const channel = parts.find(part => part.startsWith("@"))
+    if(!channel) {
+      return;
+    }
+    comfy.Say(`jlengsHolyBucket Please checkout ${channel} at https://twitch.tv/${channel} jlengsBeardy `)
+  }
 };
 
 comfy.onCommand = (user, command, message, flags, extra) => {
