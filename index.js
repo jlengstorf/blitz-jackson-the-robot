@@ -1,9 +1,6 @@
 require('dotenv').config();
 const comfy = require('comfy.js');
-const guest = {
-  name: '',
-  socialMediaUrl: '',
-}
+const guest = ''
 
 const commands = {
   blitzed: (user, message, flags, extra) => {
@@ -32,23 +29,12 @@ const commands = {
     if(channel !== process.env.BOTOWNER) {
       return;
     }
-    const generateMessage = () => {
-      if(guest.name === '' || guest.socialMediaUrl === '') {
-        return `There is no guest set. ${channel} , are you running solo today? jlengsBeardy`
-      }
-      return `jlengsHolyBucket jlengsHolyBucket Our guest today is ${guest.name}
-      Please follow them at ${guest.socialMediaUrl}
-      jlengsHolyBucket jlengsHolyBucket
-      `
-    }
-    const parts = message.split(' ')
-    if(!broadcaster && !mod || parts.length === 0){
-      comfy.Say(generateMessage(), channel)
+    if(guest === '') {
+      comfy.Say(`There is no guest set. ${channel} , are you running solo today? jlengsBeardy`);
       return;
     }
-    guest.name = parts[0]
-    guest.socialMediaUrl = parts[1]
-    comfy.Say(`jlengsHolyBucket Guest successfully added. !guest command now says: ${generateMessage()} `)
+    guest = message;
+    comfy.Say(`jlengsHolyBucket Guest successfully added. !guest command now says: ${guest} `);
   }
 };
 
