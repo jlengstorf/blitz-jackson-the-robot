@@ -25,11 +25,11 @@ const commands = {
       return;
     }
     const parts = message.split(" ");
-    const channel = parts.find(part => part.startsWith("@"))
-    if(!channel) {
+    const targetChannel = parts.find(part => part.startsWith("@"))
+    if(!targetChannel) {
       return;
     }
-    comfy.Say(`jlengsHolyBucket Please checkout ${channel} at https://twitch.tv/${channel.replace('@','')} jlengsBeardy `)
+    comfy.Say(`jlengsHolyBucket Please checkout ${targetChannel} at https://twitch.tv/${targetChannel.replace('@','')} jlengsBeardy `)
   }
 };
 
