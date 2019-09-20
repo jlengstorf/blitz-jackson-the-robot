@@ -29,7 +29,7 @@ const commands = {
     if(!channel) {
       return;
     }
-    comfy.Say(`jlengsHolyBucket Please checkout ${channel} at https://twitch.tv/${channel} jlengsBeardy `)
+    comfy.Say(`jlengsHolyBucket Please checkout ${channel} at https://twitch.tv/${channel.replace('@','')} jlengsBeardy `)
   }
 };
 
