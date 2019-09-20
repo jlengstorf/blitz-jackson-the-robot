@@ -34,10 +34,11 @@ const commands = {
     }
     const generateMessage = () => {
       if(guest.name === '' || guest.socialMediaUrl === '') {
-        return `There is no guest set. ${channel} , are you running solo today?`
+        return `There is no guest set. ${channel} , are you running solo today? jlengsBeardy`
       }
-      return `Our guest today is ${guest.name}
+      return `jlengsHolyBucket jlengsHolyBucket Our guest today is ${guest.name}
       Please follow them at ${guest.socialMediaUrl}
+      jlengsHolyBucket jlengsHolyBucket
       `
     }
     const parts = message.split(' ')
@@ -47,7 +48,7 @@ const commands = {
     }
     guest.name = parts[0]
     guest.socialMediaUrl = parts[1]
-    comfy.Say(`Guest successfully added. !guest command now says: ${generateMessage()} `)
+    comfy.Say(`jlengsHolyBucket Guest successfully added. !guest command now says: ${generateMessage()} `)
   }
 };
 
