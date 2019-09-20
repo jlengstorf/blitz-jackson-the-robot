@@ -10,7 +10,7 @@ const commands = {
     if(user !== 'chrisbiscardi') {
     comfy.Say('LISTEN TO CHRIS! Chris is always right jlengsBeardy')
     } else {
-      comfy.Say('jlengsHolyBucket Yes, you\'re Chris. jlengsHolyBucket', channel)
+      comfy.Say('jlengsHolyBucket Yes, you’re Chris. jlengsHolyBucket', channel)
     }
   },
   echo: (user, message, { broadcaster, mod }, { channel }) => {
