@@ -24,6 +24,20 @@ const commands = {
 
     comfy.Say(message, channel);
   },
+  so: (user, message, {broadcaster, mod}, {channel}) => {
+    // only broadcasters or mods can shoutout
+    // don't want the !so command to fight with any existing channel !so commands
+    // so should return if not BOTOWNER
+    if((!broadcaster && !mod) || channel !== process.env.BOTOWNER ) {
+      return;
+    }
+    const parts = message.split(" ");
+    const targetChannel = parts.find(part => part.startsWith("@"))
+    if(!targetChannel) {
+      return;
+    }
+    comfy.Say(`jlengsHolyBucket Please checkout ${targetChannel} at https://twitch.tv/${targetChannel.replace('@','')} jlengsBeardy `)
+  }
 };
 
 comfy.onCommand = (user, command, message, flags, extra) => {
@@ -35,6 +49,6 @@ comfy.onCommand = (user, command, message, flags, extra) => {
 comfy.Init(
   process.env.TWITCHUSER,
   process.env.OAUTH,
-  ['jlengstorf', 'chrisbiscardi'],
+  [process.env.BOTOWNER, 'chrisbiscardi'],
   true,
 );
