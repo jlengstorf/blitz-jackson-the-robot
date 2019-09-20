@@ -6,6 +6,13 @@ const commands = {
     console.log({ user, message, flags, extra });
     comfy.Say('KAPOW YOU GOT BLITZED! MorphinTime', extra.channel);
   },
+  chris: (user, _,_, {channel}) => {
+    if(user !== 'chrisbiscardi') {
+    comfy.Say('LISTEN TO CHRIS! Chris is always right jlengsBeardy')
+    } else {
+      comfy.Say('jlengsHolyBucket Yes, you\'re Chris. jlengsHolyBucket', channel)
+    }
+  },
   echo: (user, message, { broadcaster, mod }, { channel }) => {
     if (!broadcaster && !mod) {
       comfy.Say(
