@@ -1,0 +1,11 @@
+type Command {
+  command: String!
+  message: String!
+  timeout: Int!
+  isActive: Boolean!
+}
+
+type Query {
+  getActiveCommands(isActive: Boolean!): [Command!]!
+  getCommand(command: String!): Command!
+}
