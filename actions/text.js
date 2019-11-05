@@ -6,6 +6,7 @@ client.messages
   .create({
     from: '+13345186489',
     to: process.env.TWILIO_PHONE_NUMBER,
+    message: 'Someone pushed to BlitzBot',
   })
   .then(message => console.log(message.sid))
   .done();
