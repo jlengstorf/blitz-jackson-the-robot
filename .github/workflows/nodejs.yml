@@ -23,6 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: yarn install, build, and test
         run: |
+          yarn
           yarn test
       - name: Text Jason
         uses: ./actions
