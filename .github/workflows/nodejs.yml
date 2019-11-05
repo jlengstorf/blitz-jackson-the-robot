@@ -25,4 +25,4 @@ jobs:
         run: |
           yarn test
       - name: Text Jason
-        uses: ./actions/text.js
+        uses: ./actions
