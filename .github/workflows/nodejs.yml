@@ -4,6 +4,11 @@ on: [push]
 
 jobs:
   build:
+    env:
+      TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+      TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+      TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
+
     runs-on: ubuntu-latest
 
     strategy:
@@ -16,8 +21,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
+      - name: yarn install, build, and test
         run: |
           yarn test
-        env:
-          CI: true
+      - name: Text Jason
+        uses: ./actions/text.js

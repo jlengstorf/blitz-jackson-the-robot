@@ -1,0 +1,5 @@
+name: 'Text Jason'
+description: 'Send Jason a friendly toot toot on his phone.'
+runs:
+  using: 'node12'
+  main: './actions/text.js'
