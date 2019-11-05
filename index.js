@@ -120,7 +120,10 @@ const commands = {
   },
   chris: (user, _message, _flags, { channel }) => {
     if (user !== 'chrisbiscardi') {
-      comfy.Say('LISTEN TO CHRIS! Chris is always right jlengsBeardy', channel);
+      comfy.Say(
+        'LISTEN TO CHRIS! Chris is always right chrisb24PartyCorgi chrisb24PartyCorgi',
+        channel,
+      );
     } else {
       comfy.Say(
         'jlengsHolyBucket Yes, you’re Chris. jlengsHolyBucket',
@@ -169,6 +172,7 @@ comfy.onCommand = (user, command, message, flags, extra) => {
     updateOrCreateCommand(cmd, msg);
   }
 
+  console.log(extra);
   if (currentCommand) {
     console.log(JSON.stringify(flags));
     comfy.Say(currentCommand.message, extra.channel);
