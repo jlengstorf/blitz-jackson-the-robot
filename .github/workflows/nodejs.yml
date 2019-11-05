@@ -3,12 +3,31 @@ name: Node CI
 on: [push]
 
 jobs:
-  build:
+  twilio:
+    needs: build
+
     env:
       TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
       TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
       TWILIO_PHONE_NUMBER: ${{ secrets.TWILIO_PHONE_NUMBER }}
 
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        run: yarn
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Text Jason
+        uses: ./actions
+
+  build:
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,5 +44,9 @@ jobs:
         run: |
           yarn
           yarn test
-      - name: Text Jason
-        uses: ./actions
+      - uses: actions/cache@v1
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
