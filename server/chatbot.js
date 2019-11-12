@@ -1,14 +1,27 @@
 const comfy = require('comfy.js');
 
 let socket = false;
+let pinger;
 
 module.exports = wss => {
   const { loadCommands, updateOrCreateCommand } = require('./db');
 
   // listen for a websocket connection and grab it for sending events
   wss.on('connection', ws => {
-    // we only want to
+    // we only want to have one active socket to avoid duplicates
+    // this kinda feels like a hack, but it does what I want so #yolo
     socket = ws;
+
+    // if you want to debug, uncomment this and send messages from the client
+    // socket.on('message', message => {
+    //   console.log(message);
+    // });
+
+    // set a ping interval to keep the connection alive
+    clearInterval(pinger);
+    pinger = setInterval(() => {
+      socket.send(JSON.stringify('ping'));
+    }, 15000);
   });
 
   // we also support custom commands that needs extra logic, etc.

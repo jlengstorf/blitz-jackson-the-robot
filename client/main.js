@@ -1,4 +1,4 @@
-const ws = new WebSocket(`wss://${location.host}`);
+const ws = new WebSocket(`ws://${location.host}`);
 
 // seconds * 1000 to get a timeout
 const CMD_COOLDOWN = 30 * 1000;
@@ -69,6 +69,10 @@ ws.onclose = () => {
 
 ws.onmessage = event => {
   const msg = JSON.parse(event.data);
+
+  if (msg === 'ping') {
+    ws.send('pong');
+  }
 
   handleCommand(msg);
 };

@@ -26,20 +26,3 @@ server.on('upgrade', (request, socket, head) => {
 server.listen(8080, () => {
   console.log('Listening on http://localhost:8080');
 });
-
-// const io = require('./events');
-// io.on('connection', socket => {
-//   socket.on('heyoooo', data => {
-//     console.log(JSON.stringify(data));
-//   });
-
-//   setInterval(() => {
-//     socket.broadcast.emit('toodles', { broadcast: true });
-//   }, 2000);
-
-//   // socket.on('disconnect', () => {
-//   //   socket.removeAllListeners('test');
-//   // });
-
-//   initializeChatbot(socket);
-// });
