@@ -1,4 +1,4 @@
-const ws = new WebSocket(`ws://${location.host}`);
+const ws = new WebSocket(`wss://${location.host}`);
 
 // seconds * 1000 to get a timeout
 const CMD_COOLDOWN = 30 * 1000;
