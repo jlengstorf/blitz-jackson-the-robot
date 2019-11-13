@@ -1,3 +1,10 @@
+import playSound from '../util/play-sound.js';
+
+const MUSIC_URL =
+  'https://res.cloudinary.com/jlengstorf/video/upload/so_25.8,eo_33.2/v1573608942/lwj-sfx/busybody.mp3';
+const CORGI_URL =
+  'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/party-corgi';
+
 export default () => {
   let isActive = false;
 
@@ -7,8 +14,7 @@ export default () => {
 
   const container = document.getElementById('corgi-storm');
   const corgi = document.createElement('img');
-  corgi.src =
-    'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/party-corgi';
+  corgi.src = CORGI_URL;
 
   let corgiCoordinates = [];
   for (let i = 0; i < 30; i++) {
@@ -39,6 +45,8 @@ export default () => {
 
       corgis.push(el);
     });
+
+  playSound(MUSIC_URL);
 
   setTimeout(() => {
     isActive = false;
