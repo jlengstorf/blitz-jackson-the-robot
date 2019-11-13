@@ -24,12 +24,13 @@ module.exports = wss => {
     }, 15000);
   });
 
-  // we also support custom commands that needs extra logic, etc.
-  const blitzed = require('./commands/blitzed');
-  const chris = require('./commands/chris');
-  const so = require('./commands/so');
-
-  const commands = { blitzed, chris, so };
+  // we also support custom commands that needs SFX, extra logic, etc.
+  const commands = {
+    blitzed: require('./commands/blitzed'),
+    chris: require('./commands/chris'),
+    so: require('./commands/so'),
+    plzhold: require('./commands/plzhold'),
+  };
 
   comfy.onCommand = async (user, command, message, flags, extra) => {
     const dbCommands = await loadCommands();

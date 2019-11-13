@@ -1,8 +1,12 @@
-const ws = new WebSocket(`wss://${location.host}`);
+// on http:// we need to use ws:// but over SSL we need to use wss://
+// this is kind of a hack to make sure we’re always matching protocols
+const ws = new WebSocket(
+  `${location.protocol.replace('http', 'ws')}://${location.host}`,
+);
 
 // seconds * 1000 to get a timeout
 const CMD_COOLDOWN = 30 * 1000;
-const container = document.getElementById('app');
+const cmdDisplay = document.querySelector('.command-display');
 
 const commandsOnTimeOut = new Map();
 
@@ -26,32 +30,22 @@ const handleCommand = msg => {
 
   // show a GIF if the command has one
   if (msg.gif) {
-    const img = document.createElement('img');
+    const img = cmdDisplay.querySelector('img');
     img.classList.add('command-image', 'visible');
     img.src = msg.gif;
 
-    const text = document.createElement('p');
-    text.className = 'command-text';
+    const text = cmdDisplay.querySelector('text');
     text.innerText = `${msg.user} redeemed ${msg.name}`;
 
-    const displayBox = document.createElement('div');
-    displayBox.className = 'command-display';
-    displayBox.appendChild(img);
-    displayBox.appendChild(text);
-
-    container.appendChild(displayBox);
+    const duration = (msg.duration || 4) * 1000;
 
     setTimeout(() => {
-      displayBox.classList.add('visible');
+      cmdDisplay.classList.add('visible');
     }, 50);
 
     setTimeout(() => {
-      displayBox.classList.remove('visible');
-    }, 4000);
-
-    setTimeout(() => {
-      container.removeChild(displayBox);
-    }, 5000);
+      cmdDisplay.classList.remove('visible');
+    }, duration);
   }
 };
 
