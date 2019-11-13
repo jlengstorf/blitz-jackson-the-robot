@@ -16,7 +16,7 @@ module.exports = (user, message, { broadcaster, mod }, { channel }) => {
 
   return {
     name: 'so',
-    message: `jlengsHolyBucket Please checkout ${soTarget} at ${twitchLink} jlengsBeardy `,
+    message: `▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬ Please check out ${soTarget} at ${twitchLink} jlengsHolyBucket jlengsBeardy ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬`,
     channel,
   };
 };
