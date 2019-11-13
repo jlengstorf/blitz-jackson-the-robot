@@ -36,7 +36,8 @@ module.exports = wss => {
     chris: require('./commands/chris'),
     plzhold: require('./commands/plzhold'),
     so: require('./commands/so'),
-    'release-the-corgis': require('./commands/release-the-corgis'),
+    // temporarily disable this — waaaay too distracting
+    // 'release-the-corgis': require('./commands/release-the-corgis'),
   };
 
   comfy.onChat = (_user, _message, _flags, _self, extra) => {
