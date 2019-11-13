@@ -10,12 +10,12 @@ body {
 
 #app {
   background: transparent;
+  /* background: url(https://images.unsplash.com/photo-1483653364400-eedcfb9f1f88?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80); */
+  background-position: center;
+  background-size: cover;
   height: 100vh;
   position: relative;
   width: 100vw;
-  background: url(https://lengstorf.com/images/jason-lengstorf.jpg);
-  background-position: center;
-  background-size: cover;
 }
 
 .command-display {
