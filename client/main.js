@@ -1,7 +1,7 @@
 // on http:// we need to use ws:// but over SSL we need to use wss://
 // this is kind of a hack to make sure we’re always matching protocols
 const ws = new WebSocket(
-  `${location.protocol.replace('http', 'ws')}://${location.host}`,
+  `${location.protocol.replace('http', 'ws')}//${location.host}`,
 );
 
 // seconds * 1000 to get a timeout
