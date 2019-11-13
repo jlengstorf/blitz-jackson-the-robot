@@ -28,8 +28,18 @@ module.exports = wss => {
   const commands = {
     blitzed: require('./commands/blitzed'),
     chris: require('./commands/chris'),
-    so: require('./commands/so'),
     plzhold: require('./commands/plzhold'),
+    so: require('./commands/so'),
+    'release-the-corgis': require('./commands/release-the-corgis'),
+  };
+
+  comfy.onChat = (_user, _message, _flags, _self, extra) => {
+    console.log(JSON.stringify({ extra }, null, 2));
+    const emoteIDs = Object.keys(extra.messageEmotes || {});
+
+    if (emoteIDs.length > 0) {
+      socket.send(JSON.stringify(emoteIDs));
+    }
   };
 
   comfy.onCommand = async (user, command, message, flags, extra) => {

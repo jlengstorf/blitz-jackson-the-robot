@@ -59,3 +59,42 @@ body {
   stroke-linejoin: round;
   text-anchor: middle;
 }
+
+#corgi-storm {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 190px;
+}
+
+#corgi-storm img {
+  position: absolute;
+  right: -200px;
+  animation: corgi-run 4s linear, corgi-jump 500ms ease-in-out;
+  animation-delay: 1s, 4s;
+}
+
+@keyframes corgi-run {
+  from {
+    right: -200px;
+  }
+
+  to {
+    right: 105%;
+  }
+}
+
+@keyframes corgi-jump {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}

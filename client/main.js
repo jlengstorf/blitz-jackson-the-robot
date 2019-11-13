@@ -1,3 +1,5 @@
+import corgiStorm from './corgis.js';
+
 // on http:// we need to use ws:// but over SSL we need to use wss://
 // this is kind of a hack to make sure we’re always matching protocols
 const ws = new WebSocket(
@@ -14,6 +16,10 @@ const handleCommand = msg => {
   // if this command has been called too recently, bail
   if (commandsOnTimeOut.get(msg.name)) {
     return;
+  }
+
+  if (msg.name === 'release-the-corgis') {
+    corgiStorm();
   }
 
   // play audio if the command has any
