@@ -3,6 +3,12 @@ const comfy = require('comfy.js');
 let socket = false;
 let pinger;
 
+const sendMessage = msg => {
+  if (!socket) return;
+
+  socket.send(JSON.stringify(msg));
+};
+
 module.exports = wss => {
   const { loadCommands, updateOrCreateCommand } = require('./db');
 
@@ -20,7 +26,7 @@ module.exports = wss => {
     // set a ping interval to keep the connection alive
     clearInterval(pinger);
     pinger = setInterval(() => {
-      socket.send(JSON.stringify('ping'));
+      sendMessage('ping');
     }, 15000);
   });
 
@@ -34,11 +40,17 @@ module.exports = wss => {
   };
 
   comfy.onChat = (_user, _message, _flags, _self, extra) => {
-    console.log(JSON.stringify({ extra }, null, 2));
-    const emoteIDs = Object.keys(extra.messageEmotes || {});
+    const emotes = Object.keys(extra.messageEmotes || {}).map(id => ({
+      id,
+      count: extra.messageEmotes[id].length,
+    }));
 
-    if (emoteIDs.length > 0) {
-      socket.send(JSON.stringify(emoteIDs));
+    if (emotes.length > 0) {
+      sendMessage({
+        type: 'chat',
+        emotes,
+        channel: extra.channel,
+      });
     }
   };
 
@@ -58,7 +70,10 @@ module.exports = wss => {
     if (['list', 'ls', 'commands'].includes(command)) {
       const names = dbCommands.map(({ command }) => command);
 
-      comfy.Say(`\`\`\`\n${names.join('\n')}\n\`\`\``, extra.channel);
+      comfy.Say(
+        `Custom commands for this channel: ${names.join(', ')}`,
+        extra.channel,
+      );
     }
 
     if (dbCommand) {
@@ -73,9 +88,7 @@ module.exports = wss => {
         return;
       }
 
-      if (socket) {
-        socket.send(JSON.stringify({ ...result, user }));
-      }
+      sendMessage({ ...result, user });
 
       comfy.Say(result.message, result.channel);
     }
