@@ -5,16 +5,22 @@ const path = require('path');
 const express = require('express');
 const http = require('http');
 
+const api = require('./api');
+const { initializeSocket } = require('./socket');
 const initializeChatbot = require('./chatbot');
 
 const app = express();
+
+app.use(express.json());
+app.post('/api', api);
 
 app.use(express.static(path.join(__dirname, '../client')));
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ clientTracking: false, noServer: true });
 
-initializeChatbot(wss);
+initializeSocket(wss);
+initializeChatbot();
 
 server.on('upgrade', (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, ws => {

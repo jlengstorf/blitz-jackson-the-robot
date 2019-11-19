@@ -83,8 +83,6 @@ ws.onmessage = event => {
     return;
   }
 
-  console.log(msg);
-
   if (msg === 'ping') {
     ws.send('pong');
   }
