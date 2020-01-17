@@ -2,24 +2,20 @@ import playSound from '../util/play-sound.js';
 
 const MUSIC_URL =
   'https://res.cloudinary.com/jlengstorf/video/upload/so_25.8,eo_33.2/v1573608942/lwj-sfx/busybody.mp3';
-const CORGI_URL =
+const PARTYCORGI_URL =
   'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/party-corgi';
+const BEARDCORGI_URL =
+  'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/jlengstorf-corgi';
 
-export default () => {
-  let isActive = false;
+let isActive = false;
 
-  if (isActive) return;
-
-  isActive = true;
-
+function addEmotes(emotePossibilities) {
   const container = document.getElementById('corgi-storm');
-  const corgi = document.createElement('img');
-  corgi.src = CORGI_URL;
 
-  let corgiCoordinates = [];
+  let coords = [];
   for (let i = 0; i < 30; i++) {
     const duration = Math.round(Math.random() * 3000) + 2000;
-    corgiCoordinates.push({
+    coords.push({
       duration,
       runDelay: Math.round(Math.random() * 3000),
       jumpDelay: Math.round(Math.random() * duration),
@@ -27,13 +23,16 @@ export default () => {
     });
   }
 
-  let corgis = [];
-  corgiCoordinates
+  let emotes = [];
+  coords
     .sort((a, b) => a.top - b.top)
     .map((coords, i) => ({ ...coords, zIndex: i + 1 }))
     .forEach(coords => {
+      const emoteIndex = Math.abs(
+        Math.round(Math.random() * emotePossibilities.length - 1),
+      );
       const { duration, runDelay, jumpDelay, top, zIndex } = coords;
-      const el = corgi.cloneNode();
+      const el = emotePossibilities[emoteIndex].cloneNode();
 
       el.style.cssText = `
         animation-delay: ${runDelay}ms, ${jumpDelay}ms;
@@ -43,15 +42,28 @@ export default () => {
       `;
       container.appendChild(el);
 
-      corgis.push(el);
+      emotes.push(el);
     });
-
-  playSound(MUSIC_URL);
 
   setTimeout(() => {
     isActive = false;
-    corgis.forEach(el => {
+    emotes.forEach(el => {
       el.remove();
     });
   }, 12000);
+}
+
+export default () => {
+  if (isActive) return;
+
+  isActive = true;
+
+  const corgi = document.createElement('img');
+  corgi.src = PARTYCORGI_URL;
+  const beard = document.createElement('img');
+  beard.src = BEARDCORGI_URL;
+
+  addEmotes([corgi, beard]);
+
+  playSound(MUSIC_URL);
 };

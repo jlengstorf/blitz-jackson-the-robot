@@ -1,5 +1,5 @@
 // this is the Twitch emote ID; check emote URLs to find it
-const EMOTE_ID = '300577853';
+const EMOTES_TO_COUNT = ['300577853', '301195175'];
 let EMOTE_COUNT = 0;
 let inactive = false;
 let timeout;
@@ -65,7 +65,7 @@ export default (emotes, callback, threshold = 20) => {
   }
 
   const count = emotes
-    .filter(emote => emote.id === EMOTE_ID)
+    .filter(emote => EMOTES_TO_COUNT.includes(emote.id))
     .reduce((acc, emote) => emote.count + acc, 0);
 
   EMOTE_COUNT += count;
