@@ -5,7 +5,9 @@ const MUSIC_URL =
 const PARTYCORGI_URL =
   'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/party-corgi';
 const BEARDCORGI_URL =
-  'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/jlengstorf-corgi';
+  'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/jlengstorfcorgi';
+const CHRISBISCORGI_URL =
+  'https://res.cloudinary.com/jlengstorf/image/upload/q_auto,f_auto,w_100/v1573606931/chris-biscorgi';
 
 let isActive = false;
 
@@ -62,8 +64,10 @@ export default () => {
   corgi.src = PARTYCORGI_URL;
   const beard = document.createElement('img');
   beard.src = BEARDCORGI_URL;
+  const chris = document.createElement('img');
+  chris.src = CHRISBISCORGI_URL;
 
-  addEmotes([corgi, beard]);
+  addEmotes([corgi, beard, chris]);
 
   playSound(MUSIC_URL);
 };
