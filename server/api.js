@@ -1,8 +1,5 @@
 const { sendMessage } = require('./socket');
-const commands = {
-  blitzed: require('./commands/blitzed'),
-  plzhold: require('./commands/plzhold'),
-};
+const commands = {};
 
 module.exports = (req, res) => {
   const msg = req.body;
