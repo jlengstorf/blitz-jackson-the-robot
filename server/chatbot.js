@@ -24,10 +24,6 @@ module.exports = () => {
 
   // we also support custom commands that needs SFX, extra logic, etc.
   const commands = {
-    blitzed: require('./commands/blitzed'),
-    chris: require('./commands/chris'),
-    plzhold: require('./commands/plzhold'),
-    so: require('./commands/so'),
     // temporarily disable this — waaaay too distracting
     // 'release-the-corgis': require('./commands/release-the-corgis'),
   };
