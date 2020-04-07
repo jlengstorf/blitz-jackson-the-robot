@@ -1,6 +1,7 @@
 import playSound from './util/play-sound.js';
 import corgiStampede from './effects/corgi-stampede.js';
 import emoteCount from './effects/emote-count.js';
+import { init, checkForBoops } from './effects/boop-drop.js';
 
 // on http:// we need to use ws:// but over SSL we need to use wss://
 // this is kind of a hack to make sure we’re always matching protocols
@@ -14,13 +15,14 @@ const cmdDisplay = document.querySelector('.command-display');
 
 const commandsOnTimeOut = new Map();
 
-const handleChat = msg => {
+const handleChat = (msg) => {
   if (msg.emotes) {
+    checkForBoops(msg.emotes);
     emoteCount(msg.emotes, corgiStampede);
   }
 };
 
-const handleCommand = msg => {
+const handleCommand = (msg) => {
   // if this command has been called too recently, bail
   if (commandsOnTimeOut.get(msg.name)) {
     return;
@@ -63,6 +65,9 @@ const handleCommand = msg => {
   }
 };
 
+// initialize the boop drop canvas
+init('.boops');
+
 ws.onerror = () => {
   console.error('WebSocket error!');
 };
@@ -75,7 +80,7 @@ ws.onclose = () => {
   console.log('WebSocket connection closed');
 };
 
-ws.onmessage = event => {
+ws.onmessage = (event) => {
   const url = new URL(location);
   const msg = JSON.parse(event.data);
 

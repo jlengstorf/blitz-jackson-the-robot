@@ -65,8 +65,10 @@ export default (emotes, callback, threshold = 20) => {
   }
 
   const count = emotes
-    .filter(emote => EMOTES_TO_COUNT.includes(emote.id))
+    .filter((emote) => EMOTES_TO_COUNT.includes(emote.id))
     .reduce((acc, emote) => emote.count + acc, 0);
+
+  if (count < 1) return;
 
   EMOTE_COUNT += count;
 
